@@ -59,9 +59,9 @@ const NewCartPages = (props) => {
     useEffect(() => {
         console.log(isUserAuthenticated);
         fetchCartDetails();
-        if (props.location.query.paymentstatus) {
-            console.log(props.location.query.payment_status)
-            console.log(props.location.query.payment_id)
+        if (props.location.search.payment_status) {
+            console.log(props.location.search.payment_status)
+            console.log(props.location.search.payment_id)
             //     console.log(props.location.query.payment_request_id)
         }
 
