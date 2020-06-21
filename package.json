@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon index.js",
+    "start": "node index.js",
     "myapp": "npm start --prefix myapp",
     "dev": "concurrently \"npm run start\" \"npm run myapp\"",
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix myapp && npm run build --prefix myapp"
