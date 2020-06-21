@@ -1,0 +1,26 @@
+{
+  "name": "tntwatches",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "server": "nodemon index.js",
+    "myapp": "npm start --prefix myapp",
+    "dev": "concurrently \"npm run server\" \"npm run myapp\"",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix myapp && npm run build --prefix myapp"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "localtunnel": "^2.0.0",
+    "mongoose": "^5.9.18",
+    "nodemailer": "^6.4.8"
+  },
+  "devDependencies": {
+    "concurrently": "^5.2.0",
+    "nodemon": "^2.0.4"
+  }
+}

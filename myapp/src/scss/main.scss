@@ -1,0 +1,16 @@
+@import 'config';
+
+*{
+    box-sizing: border-box;
+}
+body {
+    color:set-text-color($primary-color);
+    margin:0;
+    font-family:'Segoe UI', Tahoma,  Verdana, sans-serif;
+    line-height: 1.5;
+}
+Link{
+    text-decoration: none;
+}
+
+@import 'mobile';
