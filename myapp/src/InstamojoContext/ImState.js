@@ -15,7 +15,7 @@ const ImState = (props) => {
     const initialState = {
 
         paymentLoading: false,
-        paymentRquestResult: {},
+        paymentRequestResult: null,
         iminfo: ""
 
     }
@@ -31,20 +31,24 @@ const ImState = (props) => {
                 'X-Auth-Token': credential["X-Auth-Token"],
                 'Access-Control-Allow-Origin': '*',
                 'Access-Control-Allow-Credentials': 'true',
+                "content-type": "application/json"
             }
         }
 
         try {
 
-            const res = await axios.post("https://www.instamojo.com/api/1.1/payment-requests/", data, config);
+            const res = await axios.post("/api/instamojo", { data, config }, {
+                headers: {
+                    'content-type': 'application/json'
+                }
+            });
 
-            console.log(res.data);
             dispatch({
                 type: PAYMENT_REQUEST_CREATED_S,
                 payload: res.data
             })
 
-
+            return res.data.payment_request.longurl
         } catch (error) {
             dispatch({
                 type: PAYMENT_REQUEST_CREATED_F
@@ -61,7 +65,7 @@ const ImState = (props) => {
     return (
         <ImContext.Provider value={{
             paymentLoading: state.paymentLoading,
-            paymentRquestResult: state.paymentRquestResult,
+            paymentRequestResult: state.paymentRequestResult,
             iminfo: state.iminfo,
             createPaymentRequest,
             setImLoading,

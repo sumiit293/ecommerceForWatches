@@ -10,7 +10,7 @@ const NewCartPages = (props) => {
 
     const { isUserAuthenticated, user } = useContext(AuthContext);
     const { fetchCartDetails, cartLoading, cartDetails, removeFromCart, placeOrder } = useContext(CartContext);
-    const { createPaymentRequest, paymentRequestResult, setImLoading } = useContext(ImContext);
+    const { createPaymentRequest, paymentRequestResult, setImLoading, paymentLoading } = useContext(ImContext);
 
     const push = useHistory();
 
@@ -20,11 +20,7 @@ const NewCartPages = (props) => {
         cartDetails.map(product => total += product.productPrice);
         return total;
     }
-    // for saving the order to database
-    const data = {
-        totalSum: subTotal(cartDetails),
-        orderDetails: cartDetails
-    }
+
 
     //for making the payment request to instamoji
     const paymentData = {
@@ -40,13 +36,14 @@ const NewCartPages = (props) => {
     }
 
     //function for placing the order
-    const order = () => {
-        createPaymentRequest(paymentData);
-        if (paymentRequestResult.longurl) {
-            push.push(paymentRequestResult.longurl)
+    const order = async () => {
+        const longurl = await createPaymentRequest(paymentData);
+
+        console.log(longurl);
+        if (longurl) {
+            window.location.assign(longurl);
         }
 
-        // placeOrder(data);
     }
 
     const productId = useRef();
@@ -56,13 +53,32 @@ const NewCartPages = (props) => {
         removeFromCart(e.target.id);
     }
 
+
     useEffect(() => {
-        console.log(isUserAuthenticated);
+
+
         fetchCartDetails();
-        if (props.location.search.payment_status) {
+
+        const params = new URLSearchParams(window.location.search)
+        if (params.has("payment_status")) {
+
+
             console.log(props.location.search.payment_status)
             console.log(props.location.search.payment_id)
-            //     console.log(props.location.query.payment_request_id)
+
+            if (params.get("payment_status") === "Credit") {
+                // for saving the order to database
+                const data = {
+                    totalSum: subTotal(cartDetails),
+                    orderDetails: cartDetails,
+                    paymentId: params.get("payment_id")
+                }
+
+                placeOrder(data);
+                setImLoading();
+            }
+
+
         }
 
     }, [isUserAuthenticated])
@@ -72,6 +88,7 @@ const NewCartPages = (props) => {
     return (
 
         <Fragment>
+            {paymentLoading && <h3>Processing your payment...</h3>}
             <div style={style}>
                 <div><h3>{user.name}</h3></div>
                 <div> <ShoppingCartIcon style={{ width: '50px', height: '50px', margin: '1px auto', display: 'block' }} /></div>
