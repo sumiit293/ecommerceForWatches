@@ -6,11 +6,13 @@ import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import Button from '@material-ui/core/Button'
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { useHistory } from 'react-router-dom'
-const NewCartPages = () => {
+const NewCartPages = (props) => {
 
     const { isUserAuthenticated, user } = useContext(AuthContext);
     const { fetchCartDetails, cartLoading, cartDetails, removeFromCart, placeOrder } = useContext(CartContext);
-    const { createPaymentRequest } = useContext(ImContext);
+    const { createPaymentRequest, paymentRequestResult, setImLoading } = useContext(ImContext);
+
+    const push = useHistory();
 
     //getting the total price of item in cart
     const subTotal = (cartDetails) => {
@@ -30,8 +32,8 @@ const NewCartPages = () => {
         amount: subTotal(cartDetails).toString(),
         phone: user.phone,
         buyer_name: user.name,
-        redirect_url: 'http://localhost:3000/cart',
-        send_email: false,
+        redirect_url: 'https://rocky-caverns-34732.herokuapp.com/cart',
+        send_email: true,
         send_sms: true,
         email: user.email,
         allow_repeated_payments: false
@@ -40,9 +42,13 @@ const NewCartPages = () => {
     //function for placing the order
     const order = () => {
         createPaymentRequest(paymentData);
+        if (paymentRequestResult.longurl) {
+            push.push(paymentRequestResult.longurl)
+        }
+
         // placeOrder(data);
     }
-    const push = useHistory();
+
     const productId = useRef();
 
     // function for deleting the cart item
@@ -53,6 +59,11 @@ const NewCartPages = () => {
     useEffect(() => {
         console.log(isUserAuthenticated);
         fetchCartDetails();
+        if (props.location.query.paymentstatus) {
+            console.log(props.location.query.payment_status)
+            console.log(props.location.query.payment_id)
+            //     console.log(props.location.query.payment_request_id)
+        }
 
     }, [isUserAuthenticated])
 

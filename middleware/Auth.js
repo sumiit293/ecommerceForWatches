@@ -3,7 +3,7 @@ const secret = require("./../config/MyUrl").secrect;
 
 module.exports = async (req, res, next) => {
 
-    const token = req.header("x-auth-token");
+    const token = req.header("user-auth-token");
 
     if (!token) {
         return res.status(401).json({ msg: "No token, authorization denined" });

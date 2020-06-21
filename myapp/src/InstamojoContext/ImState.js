@@ -1,6 +1,7 @@
 import React, { useReducer } from 'react'
 import ImContext from './ImContext'
 import ImReducer from './ImReducer'
+import credential from './../config/ImCredentials'
 import axios from 'axios'
 import {
 
@@ -24,32 +25,18 @@ const ImState = (props) => {
 
     const createPaymentRequest = async (data) => {
         setImLoading();
-        // const config = {
-        //     headers: {
-        //         'X-Api-Key': '9d25ead2b811ff0361b7fe05b501fe54',
-        //         'X-Auth-Token': '5975cb9dc873581e9082adaaeb069e81',
-        //         'Access-Control-Allow-Origin': '*',
-        //         'Access-Control-Allow-Credentials': 'true',
-        //     }
-        // }
+        const config = {
+            headers: {
+                'X-Api-Key': credential["X-Auth-Key"],
+                'X-Auth-Token': credential["X-Auth-Token"],
+                'Access-Control-Allow-Origin': '*',
+                'Access-Control-Allow-Credentials': 'true',
+            }
+        }
 
         try {
 
-            //const res = await axios.post("https://www.instamojo.com/api/1.1/payment-requests/", data, config);
-
-            const res = await fetch("https://www.instamojo.com/api/1.1/payment-requests/", {
-                method: "POST", // *GET, POST, PUT, DELETE, etc.
-                mode: "no-cors", // no-cors, *cors, same-origin
-                credentials: 'include', // include, *same-origin, omit
-                headers: {
-                    "Content-Type": "application/json",
-                    "X-Api-Key": "9d25ead2b811ff0361b7fe05b501fe54",
-                    "X-Auth-Token": "5975cb9dc873581e9082adaaeb069e81",
-                    "Access-Control-Allow-Origin": "*",
-                },
-
-                body: JSON.stringify(data) // body data type must match "Content-Type" header
-            })
+            const res = await axios.post("https://www.instamojo.com/api/1.1/payment-requests/", data, config);
 
             console.log(res.data);
             dispatch({
@@ -76,7 +63,8 @@ const ImState = (props) => {
             paymentLoading: state.paymentLoading,
             paymentRquestResult: state.paymentRquestResult,
             iminfo: state.iminfo,
-            createPaymentRequest
+            createPaymentRequest,
+            setImLoading,
         }}>
             {props.children}
         </ImContext.Provider>
@@ -87,7 +75,20 @@ export default ImState
 
 
 
+/*
+            const res = await fetch("https://www.instamojo.com/api/1.1/payment-requests/", {
+                method: "POST", // *GET, POST, PUT, DELETE, etc.
+                mode: "no-cors", // no-cors, *cors, same-origin
+                credentials: 'include', // include, *same-origin, omit
+                headers: {
+                    "Content-Type": "application/json",
+                    "X-Api-Key": "9d25ead2b811ff0361b7fe05b501fe54",
+                    "X-Auth-Token": "5975cb9dc873581e9082adaaeb069e81",
+                    "Access-Control-Allow-Origin": "*",
+                },
+
+                body: JSON.stringify(data) // body data type must match "Content-Type" header
+            })
 
 
-
-
+*/
