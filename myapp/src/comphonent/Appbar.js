@@ -7,7 +7,6 @@ import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import WatchIcon from '@material-ui/icons/Watch';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
-import { Link } from 'react-router-dom'
 import AuthContext from './../context/AuthContext'
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -28,9 +27,7 @@ export default function ButtonAppBar() {
 
     const { isUserAuthenticated, logout } = useContext(AuthContext);
 
-    const Logout = () => {
-        logout();
-    }
+
     useLayoutEffect(() => {
         console.log(isUserAuthenticated);
     }, [isUserAuthenticated])

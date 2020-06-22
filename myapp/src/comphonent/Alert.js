@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import MuiAlert from '@material-ui/lab/Alert';
 import { makeStyles } from '@material-ui/core/styles';
 

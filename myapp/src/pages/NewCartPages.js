@@ -1,18 +1,18 @@
-import React, { Fragment, useEffect, useContext, useRef } from 'react'
+import React, { Fragment, useEffect, useContext } from 'react'
 import AuthContext from './../context/AuthContext'
 import CartContext from './../cartContext/CartContext'
 import ImContext from './../InstamojoContext/ImContext'
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import Button from '@material-ui/core/Button'
 import CircularProgress from '@material-ui/core/CircularProgress';
-import { useHistory } from 'react-router-dom'
+
 const NewCartPages = (props) => {
 
     const { isUserAuthenticated, user } = useContext(AuthContext);
-    const { fetchCartDetails, cartLoading, cartDetails, removeFromCart, placeOrder } = useContext(CartContext);
-    const { createPaymentRequest, paymentRequestResult, setImLoading, paymentLoading } = useContext(ImContext);
+    const { fetchCartDetails, cartLoading, cartDetails, removeFromCart } = useContext(CartContext);
+    const { createPaymentRequest, paymentLoading } = useContext(ImContext);
 
-    const push = useHistory();
+
 
     //getting the total price of item in cart
     const subTotal = (cartDetails) => {
@@ -28,7 +28,7 @@ const NewCartPages = (props) => {
         amount: subTotal(cartDetails).toString(),
         phone: user.phone,
         buyer_name: user.name,
-        redirect_url: 'https://rocky-caverns-34732.herokuapp.com/cart',
+        redirect_url: 'https://rocky-caverns-34732.herokuapp.com/thanks',
         send_email: true,
         send_sms: true,
         email: user.email,
@@ -46,7 +46,7 @@ const NewCartPages = (props) => {
 
     }
 
-    const productId = useRef();
+
 
     // function for deleting the cart item
     const deleteFromCart = (e) => {
@@ -56,31 +56,8 @@ const NewCartPages = (props) => {
 
     useEffect(() => {
 
-
         fetchCartDetails();
-
-        const params = new URLSearchParams(window.location.search)
-        if (params.has("payment_status")) {
-
-
-            console.log(props.location.search.payment_status)
-            console.log(props.location.search.payment_id)
-
-            if (params.get("payment_status") === "Credit") {
-                // for saving the order to database
-                const data = {
-                    totalSum: subTotal(cartDetails),
-                    orderDetails: cartDetails,
-                    paymentId: params.get("payment_id")
-                }
-
-                placeOrder(data);
-                setImLoading();
-            }
-
-
-        }
-
+        // eslint-disable-next-line
     }, [isUserAuthenticated])
 
     // image path for acces the product image
@@ -88,7 +65,7 @@ const NewCartPages = (props) => {
     return (
 
         <Fragment>
-            {paymentLoading && <h3>Processing your payment...</h3>}
+            {paymentLoading && <h3 style={{ padding: '5px', textAlign: 'center' }}>Processing your payment...</h3>}
             <div style={style}>
                 <div><h3>{user.name}</h3></div>
                 <div> <ShoppingCartIcon style={{ width: '50px', height: '50px', margin: '1px auto', display: 'block' }} /></div>
@@ -96,7 +73,7 @@ const NewCartPages = (props) => {
             {cartLoading && <div style={styleInfo}><CircularProgress style={{ margin: '1px auto' }} /></div>}
             {(!cartLoading && cartDetails !== null && cartDetails.length !== 0) && cartDetails.map(product => <div style={styleInfo}
                 key={product.productId}>
-                <div><img src={target + product.imagePath} alt="No image" style={{ width: '50px', height: '50px', borderRadius: '10px' }} /></div>
+                <div><img src={target + product.imagePath} alt="Not found" style={{ width: '50px', height: '50px', borderRadius: '10px' }} /></div>
                 <div><p>{product.productName}</p></div>
                 <div><p>{product.productPrice}</p></div>
                 <div><i class="fa fa-trash-o" onClick={deleteFromCart} id={product.productId} /></div>

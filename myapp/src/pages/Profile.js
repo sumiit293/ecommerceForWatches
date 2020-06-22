@@ -9,6 +9,7 @@ const Profile = () => {
     var Index = 1;
     useEffect(() => {
         orderInfo();
+        // eslint-disable-next-line
     }, [])
     return (
         <Fragment>
@@ -59,11 +60,5 @@ const styleInfo = {
     margin: '20px auto',
     padding: "10px 30px",
     backgroundColor: '#eeee'
-
-}
-const ostyle = {
-    width: '400px',
-    margin: "5px auto",
-    padding: '5px',
 
 }

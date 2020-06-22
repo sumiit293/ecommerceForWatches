@@ -63,7 +63,7 @@ const ProductInfoPage = (props) => {
 function Item(props) {
     return (
         <Paper>
-            <img src={props.target + props.item.name} style={{ width: '100%', height: '300px' }} />
+            <img src={props.target + props.item.name} style={{ width: '100%', height: '300px' }} alt="404 not found" />
         </Paper>
     )
 }

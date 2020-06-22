@@ -6,7 +6,7 @@ import ArrowForwardRoundedIcon from '@material-ui/icons/ArrowForwardRounded';
 const Sidebar = (props) => {
     const path = String(window.location.pathname).split("/");
     const length = path.length
-    const target = path[length - 1] === 'signin' || path[length - 1] === 'register'
+    const target = path[length - 1] === 'signin' || path[length - 1] === 'register' || path[length - 1] === 'thanks'
 
 
     const toggleClass = () => {
@@ -23,6 +23,8 @@ const Sidebar = (props) => {
 
     useEffect(() => {
         loadUser();
+
+        // eslint-disable-next-line
     }, [isUserAuthenticated])
 
     if (target) {

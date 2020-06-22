@@ -7,14 +7,14 @@ const ProductPage = () => {
 
     const { info } = useContext(CartContext);
     const productItems = [
-        { id: "19234501", title: "Timex Brown Analog Watch", price: 5, image: "watch1.jfif" }, { id: "19234502", title: "Timex Brown Analog Watch", price: 5, image: "watch1.jpg" },
-        { id: "19234503", title: "Timex Brown Analog Watch", price: 5, image: "watch1.png" },
-        { id: "19234504", title: "Timex Brown Analog Watch", price: 5, image: "watch3.jfif" }, { id: "19234505", title: "Timex Brown Analog Watch", price: 5, image: "watch3.jpg" },
-        { id: "19234506", title: "Timex Brown Analog Watch", price: 5, image: "watch4.png" },
-        { id: "19234507", title: "Timex Brown Analog Watch", price: 5, image: "watch5.png" }, { id: "19234508", title: "Timex Brown Analog Watch", price: 5, image: "watch6.png" },
-        { id: "19234509", title: "Timex Brown Analog Watch", price: 5, image: "watch7.png" },
-        { id: "192345010", title: "Timex Brown Analog Watch", price: 5, image: "watch8.jfif" }, { id: "192345011", title: "Timex Brown Analog Watch", price: 5, image: "watch9.jfif" },
-        { id: "192345012", title: "Timex Brown Analog Watch", price: 5, image: "watch11.jfif" }
+        { id: "19234501", title: "Timex Brown ", price: 10, image: "watch1.jfif" }, { id: "19234502", title: "Brown Analog", price: 10, image: "watch1.jpg" },
+        { id: "19234503", title: "Timex  Analog", price: 10, image: "watch1.png" },
+        { id: "19234504", title: "Timex A23", price: 10, image: "watch3.jfif" }, { id: "19234505", title: "Timex Brown Analog", price: 10, image: "watch3.jpg" },
+        { id: "19234506", title: "Timex cuevey", price: 10, image: "watch4.png" },
+        { id: "19234507", title: "Timex classic", price: 10, image: "watch5.png" }, { id: "19234508", title: "Timex Brown Analog", price: 10, image: "watch6.png" },
+        { id: "19234509", title: "Zest verti ", price: 10, image: "watch7.png" },
+        { id: "192345010", title: "Zure Brown ", price: 10, image: "watch8.jfif" }, { id: "192345011", title: "Timex Brown Analog", price: 10, image: "watch9.jfif" },
+        { id: "192345012", title: "Zoct  Analog", price: 10, image: "watch11.jfif" }
     ]
     return (
         <Fragment>

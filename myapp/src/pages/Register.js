@@ -41,7 +41,7 @@ const Register = () => {
 
             push.push("/");
         }
-
+        // eslint-disable-next-line
     }, [isUserAuthenticated]);
     return (
         <Fragment>
