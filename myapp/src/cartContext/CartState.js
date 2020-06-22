@@ -22,7 +22,7 @@ const CartState = (props) => {
 
     const initialState = {
         cartLoading: false,
-        cartDetails: [{}],
+        cartDetails: [],
         recentOrders: [],
         info: null
     }

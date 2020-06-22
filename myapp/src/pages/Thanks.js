@@ -1,11 +1,11 @@
-import React, { Fragment, useContext } from 'react'
+import React, { Fragment, useContext, useEffect } from 'react'
 import CartContext from './../cartContext/CartContext'
 
 
 
 const Thanks = () => {
 
-    const { placeOrder, cartDetails } = useContext(CartContext);
+    const { placeOrder, cartDetails, fetchCartDetails } = useContext(CartContext);
     const params = new URLSearchParams(window.location.search);
 
 
@@ -37,6 +37,12 @@ const Thanks = () => {
             window.location.replace("https://rocky-caverns-34732.herokuapp.com/");
         }
     }
+
+    useEffect(() => {
+        fetchCartDetails();
+
+        //eslint-disable-next-line
+    }, [])
     return (
         <Fragment>
             <div style={bannerStyle}>
