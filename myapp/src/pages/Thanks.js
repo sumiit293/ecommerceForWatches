@@ -1,6 +1,6 @@
 import React, { Fragment, useContext, useEffect } from 'react'
 import CartContext from './../cartContext/CartContext'
-
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 
 const Thanks = () => {
@@ -29,7 +29,7 @@ const Thanks = () => {
                 }
 
                 placeOrder(data);
-                window.location.replace("https://rocky-caverns-34732.herokuapp.com/");
+                window.location.replace("https://rocky-caverns-34732.herokuapp.com/profile");
             }
 
         } else {
@@ -52,11 +52,11 @@ const Thanks = () => {
                 </div>
             </div>
             <div style={{ height: '200px', position: 'relative' }}>
-                <div style={notesStyle}>
+                {(cartDetails.length !== 0) ? <div style={notesStyle}>
                     {(params.get("payment_status") === "Credit") ?
                         <button style={button} onClick={completeOrder}>complete your order {'>'} </button>
                         : <button style={button} onClick={completeOrder}>Return to home page {'>'} </button>}
-                </div>
+                </div> : <div style={notesStyle}><CircularProgress /></div>}
             </div>
         </Fragment>
     )

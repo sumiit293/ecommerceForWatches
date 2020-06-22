@@ -172,11 +172,12 @@ router.post("/order", auth, async (req, res) => {
         var cart = await Cart.findOne({ name: req.userId });
 
 
-        const { totalSum, orderDetails } = req.body
+        const { totalSum, orderDetails, paymentId } = req.body
         const ordersArrayUnit = {
             order: {
                 TotalPrice: totalSum,
-                details: orderDetails
+                details: orderDetails,
+                paymentId: paymentId
             }
         }
         await cart.orders.unshift(ordersArrayUnit);
