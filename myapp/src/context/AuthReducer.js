@@ -22,7 +22,7 @@ export default (state, action) => {
         case LOGIN_SUCCESS:
         case REGISTER_SUCCESS:
             localStorage.setItem("authToken", action.payload);
-            return
+            return state
         case LOGIN_FAIL:
             return {
                 ...state,

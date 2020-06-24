@@ -47,7 +47,7 @@ const SignIn = (props) => {
                 <form style={{
                     width: useMediaQuery('(max-width:800px)') ? "100%" : "40%"
                 }}>
-                    {alert && <Alert />}
+                    {alert && <Alert alert={alert} severity="error" />}
                     <AccountCircleSharpIcon style={{ width: '100px', height: '100px', margin: '1px auto', display: 'block' }} />
 
                     <FormControl margin="normal" fullWidth variant="standard" size="medium" style={{ margin: '10px 5px' }}>

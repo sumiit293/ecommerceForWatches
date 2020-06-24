@@ -11,9 +11,12 @@ function Alert(props) {
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        width: '100%',
-        marginLeft: 'auto',
-        marginRight: 'auto',
+        position: 'fixed',
+        top: '100px',
+        left: '50%',
+        width: '60%',
+        zIndex: '100',
+        transform: 'translateX(-50%)',
         '& > * + *': {
             marginTop: theme.spacing(2),
         },

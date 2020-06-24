@@ -9,9 +9,9 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 const NewCartPages = (props) => {
 
     const { isUserAuthenticated, user } = useContext(AuthContext);
-    const { fetchCartDetails, cartLoading, cartDetails, removeFromCart } = useContext(CartContext);
+    const { fetchCartDetails, cartLoading, cartDetails, removeFromCart, clearCart, orderInfo, recentOrders } = useContext(CartContext);
     const { createPaymentRequest, paymentLoading } = useContext(ImContext);
-
+    var Index = 1;
 
 
     //getting the total price of item in cart
@@ -57,6 +57,7 @@ const NewCartPages = (props) => {
     useEffect(() => {
 
         fetchCartDetails();
+        orderInfo();
         // eslint-disable-next-line
     }, [isUserAuthenticated])
 
@@ -88,7 +89,26 @@ const NewCartPages = (props) => {
             </div>)}
             {(!cartLoading && cartDetails !== null && cartDetails.length !== 0) && (<div style={styleInfo}>
 
+                <Button size="small" variant="contained" color="primary" style={btnStyle} onClick={clearCart}>CLEAR CART</Button>
+            </div>)}
+            {(!cartLoading && cartDetails !== null && cartDetails.length !== 0) && (<div style={styleInfo}>
+
                 <Button size="small" variant="contained" color="primary" style={btnStyle} onClick={order}>Place Order</Button>
+            </div>)}
+            <br />
+            <br />
+            <br />
+            <br />
+            <div style={style}>
+                <div style={{ backgroundColor: '#eeee', fontSize: '25px', padding: '5px' }}>
+                    <p>Recent Orders</p>
+                </div>
+                <div><img src={target + "order.png"} alt="order.png" style={{ width: '40px', height: '40px' }} /></div>
+            </div>
+
+            {recentOrders.length === 0 && <div style={styleInfo}><p>No recent orders</p></div>}
+            {(recentOrders.length !== 0) && recentOrders.map((recentOrder) => <div style={styleInfo} key={Index}>
+                <div><h4>S.No {Index++}</h4></div> <div><p style={{ color: "blue", marginLeft: "40px" }}>Total Sum {recentOrder.order.TotalPrice}</p></div>
             </div>)}
 
         </Fragment>

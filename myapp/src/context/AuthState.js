@@ -1,7 +1,6 @@
-import React from 'react'
+import React, { useReducer } from 'react'
 import AuthContext from './AuthContext'
 import AuthReducer from './AuthReducer'
-import { useReducer } from 'react'
 import { setAuthToken } from './../Utils'
 import axios from 'axios'
 import {
@@ -22,7 +21,6 @@ import {
 const AuthState = (props) => {
 
     const initialState = {
-
         isUserAuthenticated: false,
         loading: false,
         user: {},
@@ -97,7 +95,7 @@ const AuthState = (props) => {
             loadUser();
         } catch (error) {
 
-            if (error.response.data) {
+            if (error.response) {
                 console.log(error.response.data);
                 dispatch({
                     type: REGISTER_FAIL
@@ -169,24 +167,22 @@ const AuthState = (props) => {
         })
     }
     return (
-        <AuthContext.Provider
-            value={{
-                isUserAuthenticated: state.isUserAuthenticated,
-                loading: state.loading,
-                user: state.user,
-                login,
-                loadUser,
-                register,
-                setAlert,
-                logout,
-                saveUsersDetails,
-                sendOTP,
-                alert: state.alert,
-                registerationUserDetails: state.registerationUserDetails,
-                sentOTP: state.sentOTP
+        <AuthContext.Provider value={{
+            isUserAuthenticated: state.isUserAuthenticated,
+            loading: state.loading,
+            user: state.user,
+            login,
+            loadUser,
+            register,
+            setAlert,
+            logout,
+            saveUsersDetails,
+            sendOTP,
+            alert: state.alert,
+            registerationUserDetails: state.registerationUserDetails,
+            sentOTP: state.sentOTP
 
-            }}
-        >
+        }}>
             {props.children}
         </AuthContext.Provider>
     )

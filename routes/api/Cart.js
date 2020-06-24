@@ -140,9 +140,6 @@ router.delete("/remove/:productId", auth, async (req, res) => {
 })
 router.delete("/clear", auth, async (req, res) => {
 
-
-
-
     try {
 
         var newCart = await Cart.findOne({ name: req.userId });
@@ -150,13 +147,9 @@ router.delete("/clear", auth, async (req, res) => {
             return res.json("No item in cart");
         }
 
-        newCart.cart = newCart.cart.filter((product) => {
-
-
-            return product.productId === "id"
-        });
+        newCart.cart = [];
         await newCart.save();
-        res.json("Removed from cart");
+        res.json("Cart cleared");
     } catch (err) {
         res.json({ msg: "Couldn't remove from cart something went wrong" });
     }

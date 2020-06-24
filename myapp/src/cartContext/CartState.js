@@ -49,7 +49,6 @@ const CartState = (props) => {
 
             dispatch({
                 type: CART_DETAILS_NOT_FETCHED,
-                payload: error.response.msg
             })
         }
         setCartLoading();
@@ -142,6 +141,7 @@ const CartState = (props) => {
     //function for clearing the cart
 
     const clearCart = async () => {
+        console.log("clearing cart");
         try {
             await axios.delete("/api/cart/clear");
             dispatch({
@@ -173,7 +173,8 @@ const CartState = (props) => {
             addToCart,
             removeFromCart,
             placeOrder,
-            orderInfo
+            orderInfo,
+            clearCart
         }}>
             {props.children}
         </CartContext.Provider>

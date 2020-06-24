@@ -13,7 +13,9 @@ const Thanks = () => {
     const grandTotal = (cartDetails) => {
         var total = 0;
         cartDetails.map(product => total += product.productPrice);
-        return ((total * 103) / 100 + 3)
+        //eslint-disable-next-line
+        return eval("((total * 103)/100)+3")
+
     }
     const completeOrder = () => {
 
@@ -48,7 +50,7 @@ const Thanks = () => {
             <div style={bannerStyle}>
                 <div style={notesStyle}>
                     <h1> Thank You ! For choosing us</h1>
-                    {(params.get("payment_status") === "Credit") ? <h2>Your payment was sucessful</h2> : <h2>Your payment failed</h2>}
+                    {(params.get("payment_status") === "Credit") ? <h2>Your payment was sucessful</h2> : <h2>Your payment failed </h2>}
                 </div>
             </div>
             <div style={{ height: '200px', position: 'relative' }}>

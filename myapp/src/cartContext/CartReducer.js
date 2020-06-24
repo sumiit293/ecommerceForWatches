@@ -40,7 +40,6 @@ export default (state, action) => {
             return {
                 ...state,
 
-                info: "Can't get cart now!"
             }
         case ORDER_DETAILS_FETCHED:
             return {
@@ -59,10 +58,8 @@ export default (state, action) => {
                 cartDetails: []
             }
         case REMOVE_FROM_CART_F:
-            return {
-                ...state,
-                info: "Couldn't remove from cart"
-            }
+            return state
+
         case REMOVE_ALERT:
             return {
                 ...state,
